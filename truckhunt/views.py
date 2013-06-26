@@ -18,13 +18,4 @@ def featured_page(request):
     return render(request, 'featured.html', {})
 
 def map_test_page(request):
-    gmap = maps.Map(opts = {
-        'center': maps.LatLng(38, -97),
-        'mapTypeId': maps.MapTypeId.ROADMAP,
-        'zoom': 3,
-        'mapTypeControlOptions': {
-             'style': maps.MapTypeControlStyle.DROPDOWN_MENU
-        },
-    })
-    context = {'gmapform': MapForm(initial={'map': gmap})}
-    return render_to_response('map_test.html', context)
+    return render(request, 'map_test.html', {})

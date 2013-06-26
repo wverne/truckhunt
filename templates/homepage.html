@@ -10,8 +10,10 @@
 
 {{ block.super }}
 
+<!--
 <link href="/maps/documentation/javascript/examples/default.css" 
       rel="stylesheet">
+-->
 
 <style>
   html, body, #map-canvas {
@@ -66,7 +68,7 @@
     // increase in the X direction to the right and in
     // the Y direction down.
     var image = {
-      url: 'images/beachflag.png',
+      url: '/static/images/beachflag.png',
       // This marker is 20 pixels wide by 32 pixels tall.
       size: new google.maps.Size(20, 32),
       // The origin for this image is 0,0.
@@ -75,7 +77,7 @@
       anchor: new google.maps.Point(0, 32)
     };
     var shadow = {
-      url: 'images/beachflag_shadow.png',
+      url: '/static/images/beachflag_shadow.png',
       // The shadow image is larger in the horizontal dimension
       // while the position and offset are the same as for the main image.
       size: new google.maps.Size(37, 32),
