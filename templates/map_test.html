@@ -50,26 +50,16 @@
         // the Y direction down.
 
         var image = {
-          url: '/static/images/beachflag.png',
+          url: '/static/images/truckhunt_label_small.png',
  
-          // This marker is 20 pixels wide by 32 pixels tall.
-          size: new google.maps.Size(20, 32),
+          // This marker is 55 pixels wide by 45 pixels tall.
+          size: new google.maps.Size(55, 45),
 
           // The origin for this image is 0,0.
           origin: new google.maps.Point(0,0),
 
-          // The anchor for this image is the base of the flagpole at 0,32.
-          anchor: new google.maps.Point(0, 32)
-        };
-
-        var shadow = {
-          url: '/static/images/beachflag_shadow.png',
-
-          // The shadow image is larger in the horizontal dimension
-          // while the position and offset are the same as for the main image.
-          size: new google.maps.Size(37, 32),
-          origin: new google.maps.Point(0,0),
-          anchor: new google.maps.Point(0, 32)
+          // The anchor for this image is the base of the point at 0,22.
+          anchor: new google.maps.Point(0, 22)
         };
 
       // Shapes define the clickable region of the icon.
@@ -78,7 +68,7 @@
       // coordinate closes the poly by connecting to the first
       // coordinate.
         var shape = {
-          coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+          coord: [1, 1, 1, 44, 54, 44, 54, 1],
           type: 'poly'
         };
 
