@@ -22,19 +22,26 @@
 
   <body>
 
-    <div class="navbar">
-      <div class="navbar-inner">
-	<div class="container">
-	  <a class="brand" href="/">TruckHunt</a>
-	  <ul class="nav">
-	    <li><a href="/trucks/">Trucks</a></li>
-	    <li><a href="/types/">Types</a></li>
-	    <li><a href="/featured/">Featured</a></li>
-	    <li><a href="/map_test/">Map Test</a></li>
-	  </ul>
-	</div> <!-- container -->
-      </div> <!-- navbar-inner -->
-    </div> <!-- navbar -->
+<!-- NAVBAR
+    ================================================== -->
+        <div class="navbar">
+          <div class="navbar-inner">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Project name</a>
+            <div class="nav-collapse collapse">
+             <ul class="nav">
+               <li><a href="/trucks/">Trucks</a></li>
+               <li><a href="/types/">Types</a></li>
+               <li><a href="/featured/">Featured</a></li>
+               <li><a href="/map_test/">Map Test</a></li>
+             </ul>
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
 
     {% block content %}
     <h1>TruckHunt</h1>
