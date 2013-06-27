@@ -1,1 +1,1 @@
-web: python manage.py collectstatic --noinput; gunicorn truckhunt.wsgi
+web: python truckhunt/manage.py collectstatic --noinput; bin/gunicorn_django --workers=4 --bind=0.0.0.0:$PORT truckhunt/settings.py
