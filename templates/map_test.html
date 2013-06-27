@@ -15,11 +15,6 @@
 
 {{ block.super }}
 
-<!--
-<link href="/maps/documentation/javascript/examples/default.css" 
-      rel="stylesheet">
--->
-
 <style>
   html, body, #map-canvas {
   margin: 0;
@@ -42,7 +37,7 @@
 <script>
   function initialize() {
     var mapOptions = {
-      zoom: 14,
+      zoom: 15,
       center: new google.maps.LatLng(41.824, -71.413),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -59,8 +54,8 @@
    * other.
    */
   var foodtrucks = [
-    ['Truck A', 41.835, -71.408, 3],
-    ['Truck B', 41.801, -71.401, 2],
+    ['Truck A', 41.830, -71.420, 3],
+    ['Truck B', 41.825, -71.400, 2],
     ['Truck C', 41.824, -71.413, 1]
   ];
 
@@ -74,30 +69,24 @@
     // Origins, anchor positions and coordinates of the marker
     // increase in the X direction to the right and in
     // the Y direction down.
+
     var image = {
-      url: '/static/images/beachflag.png',
-      // This marker is 20 pixels wide by 32 pixels tall.
-      size: new google.maps.Size(20, 32),
+      url: '/static/images/truckhunt_label_small.png',
+      // This marker is 55 pixels wide by 45 pixels tall.
+      size: new google.maps.Size(55, 45),
       // The origin for this image is 0,0.
       origin: new google.maps.Point(0,0),
-      // The anchor for this image is the base of the flagpole at 0,32.
-      anchor: new google.maps.Point(0, 32)
+      // The anchor for this image is the point at 22, 44.
+      anchor: new google.maps.Point(22, 44)
     };
-    var shadow = {
-      url: '/static/images/beachflag_shadow.png',
-      // The shadow image is larger in the horizontal dimension
-      // while the position and offset are the same as for the main image.
-      size: new google.maps.Size(37, 32),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(0, 32)
-    };
+
     // Shapes define the clickable region of the icon.
     // The type defines an HTML &lt;area&gt; element 'poly' which
     // traces out a polygon as a series of X,Y points. The final
     // coordinate closes the poly by connecting to the first
     // coordinate.
     var shape = {
-        coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+        coord: [1, 1, 1, 44, 54, 44, 54, 1],
         type: 'poly'
     };
     for (var i = 0; i < locations.length; i++) {
