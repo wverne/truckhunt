@@ -93,7 +93,8 @@
      "{{ truck_item.name|safe }}", 
      {{ truck_item.latitude }}, 
      {{ truck_item.longitude }},
-     {{ forloop.counter }}
+     {{ forloop.counter }},
+     "/trucks/{{ truck_item.name|escapejs }}/"
     ],
     {% endfor %}
   ];
@@ -153,9 +154,39 @@
           icon: image,
           shape: shape,
           title: foodtruck[0],
-          zIndex: foodtruck[3]
+          zIndex: foodtruck[3],
+          url: foodtruck[4]
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        window.location.href = this.url
       });
     }
+
+    // Add a special marker for the current truck
+    var curImage = {
+      url: '/static/images/truckhunt_label_small_current.png',
+      // This marker is 55 pixels wide by 45 pixels tall.
+      size: new google.maps.Size(55, 45),
+      // The origin for this image is 0,0.
+      origin: new google.maps.Point(0,0),
+      // The anchor for this image is the point at 22, 44.
+      anchor: new google.maps.Point(22, 44)
+    };
+    var curShape = {
+        coord: [1, 1, 1, 44, 54, 44, 54, 1],
+        type: 'poly'
+    };
+    var curLatLng = new google.maps.LatLng({{ this_truck.latitude|safe }},
+                                           {{ this_truck.longitude|safe }});
+    var curMarker = new google.maps.Marker({
+        position = curLatLng,
+        map: map,
+        icon: curImage,
+        shape: curShape,
+        title: "{{ this_truck.name|safe }}", 
+        zIndex: 0
+    });
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
