@@ -23,7 +23,7 @@ urlpatterns = patterns('truckhunt.views',
                        )
 
 urlpatterns += patterns('',
-                        (r'^static/(?P.*)$', 
+                        (r'^static/(.*)$', 
                          'django.views.static.serve', 
                          {'document_root': settings.STATIC_ROOT}),
                         )
