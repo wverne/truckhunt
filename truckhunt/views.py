@@ -20,4 +20,5 @@ def featured_page(request):
     return render(request, 'featured.html', {})
 
 def map_test_page(request):
-    return render(request, 'map_test.html', {})
+    return render(request, 'map_test.html',
+                  {'trucks_list': FoodTruck.objects.all()})
