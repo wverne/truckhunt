@@ -11,7 +11,8 @@ def homepage(request):
                   {'trucks_list': FoodTruck.objects.all()})
 
 def trucks_page(request):
-    return render(request, 'trucks.html', {})
+    return render(request, 'trucks.html',
+                  {'trucks_list': FoodTruck.objects.all()})
 
 def types_page(request):
     return render(request, 'types.html', {})
