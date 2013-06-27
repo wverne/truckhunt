@@ -1,1 +1,1 @@
-web: gunicorn truckhunt.wsgi
+web: python manage.py collectstatic --noinput; gunicorn truckhunt.wsgi
