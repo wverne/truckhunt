@@ -54,7 +54,7 @@
      {{ truck_item.latitude }}, 
      {{ truck_item.longitude }},
      {{ forloop.counter }},
-     "/trucks/{{ truck_item.name }}/"
+     "/trucks/{{ truck_item.name|escape }}/"
     ],
     {% endfor %}
   ];
