@@ -31,7 +31,7 @@
 <script>
 
   var map;
-
+  
   function initialize() {
     var mapOptions = {
       zoom: 15,
@@ -42,6 +42,41 @@
     map = new google.maps.Map(document.getElementById('map-canvas'),
                                   mapOptions);
   
+
+    // Try HTML5 geolocation
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = new google.maps.LatLng(position.coords.latitude,
+                                         position.coords.longitude);
+
+        var youImage = {
+          url: '/static/images/truckhunt_label_small_you.png',
+          size: new google.maps.Size(55, 45),
+          origin: new google.maps.Point(0,0),
+          anchor: new google.maps.Point(22, 44)
+        };
+        var youShape = {
+          coord: [1, 1, 1, 44, 54, 44, 54, 1],
+          type: 'poly'
+        };
+        var youMarker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          icon: youImage,
+          shape: youShape,
+          title: "You are here",
+          zIndex: -1
+        });
+        
+        map.setCenter(pos);
+
+      }, function() {
+      });
+    } else {
+      // Browser doesn't support Geolocation
+    }
+
+
     setMarkers(map, foodtrucks);
   }
 
