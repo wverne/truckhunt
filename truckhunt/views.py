@@ -20,8 +20,9 @@ def trucks_page(request, truckname=""):
     if not truck_object:
         raise Http404
 
-    return render(request, 'trucks.html',
-                  {'trucks_list': truck_object})
+    return render(request, 'truck_page.html',
+                  {'trucks_list': FoodTruck.objects.all(),
+                   'this_truck':  truck_object[0]})
 
 def types_page(request):
     return render(request, 'types.html', {})
