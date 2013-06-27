@@ -29,6 +29,9 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false">
 </script>
 <script>
+
+  var map;
+
   function initialize() {
     var mapOptions = {
       zoom: 15,
@@ -36,7 +39,7 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
   
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
+    map = new google.maps.Map(document.getElementById('map-canvas'),
                                   mapOptions);
   
     setMarkers(map, foodtrucks);

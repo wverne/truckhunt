@@ -180,12 +180,12 @@
     var curLatLng = new google.maps.LatLng({{ this_truck.latitude|safe }},
                                            {{ this_truck.longitude|safe }});
     var curMarker = new google.maps.Marker({
-        position = curLatLng,
+        position: curLatLng,
         map: map,
         icon: curImage,
         shape: curShape,
         title: "{{ this_truck.name|safe }}", 
-        zIndex: 0
+        zIndex: -1
     });
   }
 
