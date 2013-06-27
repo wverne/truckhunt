@@ -77,14 +77,7 @@
       // The anchor for this image is the point at 22, 44.
       anchor: new google.maps.Point(22, 44)
     };
-    var shadow = {
-      url: '/static/images/beachflag_shadow.png',
-      // The shadow image is larger in the horizontal dimension
-      // while the position and offset are the same as for the main image.
-      size: new google.maps.Size(37, 32),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(0, 32)
-    };
+
     // Shapes define the clickable region of the icon.
     // The type defines an HTML &lt;area&gt; element 'poly' which
     // traces out a polygon as a series of X,Y points. The final
@@ -100,7 +93,6 @@
       var marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
-          shadow: shadow,
           icon: image,
           shape: shape,
           title: foodtruck[0],
