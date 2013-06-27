@@ -53,7 +53,8 @@
      "{{ truck_item.name|safe }}", 
      {{ truck_item.latitude }}, 
      {{ truck_item.longitude }},
-     {{ forloop.counter }}
+     {{ forloop.counter }},
+     "/trucks/{{ truck_item.name }}/"
     ],
     {% endfor %}
   ];
@@ -97,7 +98,12 @@
           icon: image,
           shape: shape,
           title: foodtruck[0],
-          zIndex: foodtruck[3]
+          zIndex: foodtruck[3],
+          url: foodtruck[4]
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        window.location.href = this.url
       });
     }
   }
