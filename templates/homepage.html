@@ -48,9 +48,15 @@
    * other.
    */
   var foodtrucks = [
-    ['Truck A', 41.830, -71.420, 3],
-    ['Truck B', 41.825, -71.400, 2],
-    ['Truck C', 41.824, -71.413, 1]
+    ['Hardcoded Truck A', 41.830, -71.420, 3],
+    ['Hardcoded Truck B', 41.825, -71.400, 2],
+    ['Hardcoded Truck C', 41.824, -71.413, 1],
+    {% for truck_item in trucks_list %}
+    ['{{ truck_item.name }}', 
+     {{ truck_item.latitude }}, 
+     {{ truck_item.longitude }},
+     {{ forloop.counter }}],
+    {% endfor %}
   ];
 
   function setMarkers(map, locations) {
