@@ -2,20 +2,20 @@ from django.db import models
 
 class FoodTruck(models.Model):
     name           = models.CharField(max_length=100)    
-    website        = models.URLField()
-    twitter        = models.URLField()
-    yelp           = models.URLField()
+    website        = models.URLField(null=True)
+    twitter        = models.URLField(null=True)
+    yelp           = models.URLField(null=True)
     city           = models.CharField(max_length=100)
     state_province = models.CharField(max_length=100, 
                                       verbose_name="state/province")
 
-    image_name     = models.CharField(max_length=100)
-    description    = models.TextField()
-    menu           = models.TextField()
+    image_name     = models.CharField(max_length=100, null=True)
+    description    = models.TextField(null=True)
+    menu           = models.TextField(null=True)
 
-    last_checkin   = models.DateTimeField()
-    latitude       = models.FloatField()
-    longitude      = models.FloatField()
+    last_checkin   = models.DateTimeField(null=True)
+    latitude       = models.FloatField(null=True)
+    longitude      = models.FloatField(null=True)
 
     def __unicode__(self):
         return self.name
