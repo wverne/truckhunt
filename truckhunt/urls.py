@@ -2,8 +2,8 @@ from django.conf.urls import patterns, include, url
 import settings
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('truckhunt.views',
                        (r'^$',       'homepage'),
@@ -11,19 +11,14 @@ urlpatterns = patterns('truckhunt.views',
                        (r'^types/$', 'types_page'),
                        (r'^featured/$', 'featured_page'),
                        (r'^map_test/$', 'map_test_page'),
-    # Examples:
-    # url(r'^$', 'truckhunt.views.home', name='home'),
-    # url(r'^truckhunt/', include('truckhunt.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
                        )
 
 urlpatterns += patterns('',
+                        (r'^admin/', include(admin.site.urls)),
                         (r'^static/(.*)$', 
                          'django.views.static.serve', 
                          {'document_root': settings.STATIC_ROOT}),
+
+        # Uncomment the admin/doc line below to enable admin documentation
+        # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
                         )
