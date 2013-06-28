@@ -10,13 +10,13 @@ class FoodTruck(models.Model):
     state_province = models.CharField(max_length=100, blank=True,
                                       verbose_name="state/province")
 
-    image_name     = models.CharField(max_length=100, null=True)
+    image_name     = models.CharField(max_length=100, null=True, blank=True)
     description    = models.TextField(blank=True)
     menu           = models.TextField(blank=True)
 
-    last_checkin   = models.DateTimeField(null=True)
-    latitude       = models.FloatField(null=True)
-    longitude      = models.FloatField(null=True)
+    last_checkin   = models.DateTimeField(null=True, blank=True)
+    latitude       = models.FloatField(null=True, blank=True)
+    longitude      = models.FloatField(null=True, blank=True)
 
     owner          = models.ForeignKey(User)
 
