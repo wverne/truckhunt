@@ -18,7 +18,9 @@
     {% endfor %}
   </ul>
   {% else %}
-
+  <p class="lead">
+    {{ user.username }} has no trucks
+  </p>
   {% endif %}
 </div> <!-- container -->
 {% endblock %}
