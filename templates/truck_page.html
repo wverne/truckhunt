@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ block.super }} - {{ this_truck.name|safe }}
+{% endblock %}
+
+{% block content %}
+<div class="span3 visible-phone"> 
+    <h2>
+      <a href="{{ this_truck.website|safe }}">
+	{{ this_truck.name|safe }}
+      </a>
+    </h2>
+    <p class="lead">
+      {{ this_truck.description|safe }}
+    </p>
+    <h3>Menu</h3>
+    <p class="lead">
+      {{ this_truck.menu|safe }}
+    </p>
+</div>
+<div class="span9" id="map-canvas" ></div>
+<div class="span3 hidden-phone"> 
+    <h2>
+      <a href="{{ this_truck.website|safe }}">
+	{{ this_truck.name|safe }}
+      </a>
+    </h2>
+    <p class="lead">
+      {{ this_truck.description|safe }}
+    </p>
+    <h3>Menu</h3>
+    <p class="lead">
+      {{ this_truck.menu|safe }}
+    </p>
+</div>
+
+{% endblock %}
+
+{% block head_scripts %}
+
+{{ block.super }}
+
+<style>
+  html, body, #map-canvas {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  height: calc(100% - 14px);
+  top: -20px;
+  }
+
+  #mapCanvas img { 
+  max-width: none;
+  }
+
+  #mapCanvas label { 
+  width: auto; display:inline; 
+  } 
+
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true">
+</script>
+<script>
+
+  var map;
+
+  function initialize() {
+    var mapOptions = {
+      zoom: 15,
+      center: new google.maps.LatLng({{ this_truck.latitude|safe }}, 
+                                     {{ this_truck.longitude|safe }}),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+  
+    map = new google.maps.Map(document.getElementById('map-canvas'),
+                                  mapOptions);
+  
+    // Try HTML5 geolocation
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = new google.maps.LatLng(position.coords.latitude,
+                                         position.coords.longitude);
+
+        var youImage = {
+          url: '/static/images/truckhunt_label_small_you.png',
+          size: new google.maps.Size(55, 45),
+          origin: new google.maps.Point(0,0),
+          anchor: new google.maps.Point(23, 44)
+        };
+        var youShape = {
+          coord: [1, 1, 1, 44, 54, 44, 54, 1],
+          type: 'poly'
+        };
+        var youMarker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          icon: youImage,
+          shape: youShape,
+          title: "You are here",
+          zIndex: -1
+        });          
+
+      }, function() {
+        handleNoGeolocation(true);
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleNoGeolocation(false);
+    }
+
+    setMarkers(map, foodtrucks);
+  }
+
+  /**
+   * Data for the markers consisting of a name, a LatLng and a zIndex for
+   * the order in which these markers should display on top of each
+   * other.
+   */
+  var foodtrucks = [
+    {% for truck_item in trucks_list %}
+    {% if truck_item.latitude %}
+    {% if truck_item.longitude %}
+    [
+     "{{ truck_item.name|safe }}", 
+     {{ truck_item.latitude }}, 
+     {{ truck_item.longitude }},
+     {{ forloop.counter }},
+     "/trucks/{{ truck_item.name|escapejs }}/"
+    ],
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+  ];
+
+  function handleNoGeolocation(errorFlag) {
+    if (errorFlag) {
+      var content = 'Error: The Geolocation service failed.';
+    } else {
+      var content = 'Error: Your browser doesn\'t support geolocation.';
+    }
+    var options = {
+      map: map,
+      position: new google.maps.LatLng(41.824, -71.413),
+      content: content
+     };
+
+    var infowindow = new google.maps.InfoWindow(options);
+  }
+
+  function setMarkers(map, locations) {
+    // Add markers to the map
+
+    // Marker sizes are expressed as a Size of X,Y
+    // where the origin of the image (0,0) is located
+    // in the top left of the image.
+
+    // Origins, anchor positions and coordinates of the marker
+    // increase in the X direction to the right and in
+    // the Y direction down.
+
+    var image = {
+      url: '/static/images/truckhunt_label_small.png',
+      // This marker is 55 pixels wide by 45 pixels tall.
+      size: new google.maps.Size(55, 45),
+      // The origin for this image is 0,0.
+      origin: new google.maps.Point(0,0),
+      // The anchor for this image is the point at 23, 44.
+      anchor: new google.maps.Point(23, 44)
+    };
+
+    // Shapes define the clickable region of the icon.
+    // The type defines an HTML &lt;area&gt; element 'poly' which
+    // traces out a polygon as a series of X,Y points. The final
+    // coordinate closes the poly by connecting to the first
+    // coordinate.
+    var shape = {
+        coord: [1, 1, 1, 44, 54, 44, 54, 1],
+        type: 'poly'
+    };
+    for (var i = 0; i < locations.length; i++) {
+      var foodtruck = locations[i];
+      var myLatLng = new google.maps.LatLng(foodtruck[1], foodtruck[2]);
+      var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          icon: image,
+          shape: shape,
+          title: foodtruck[0],
+          zIndex: foodtruck[3],
+          url: foodtruck[4]
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        window.location.href = this.url
+      });
+    }
+
+    // Add a special marker for the current truck
+    var curImage = {
+      url: '/static/images/truckhunt_label_small_current.png',
+      // This marker is 55 pixels wide by 45 pixels tall.
+      size: new google.maps.Size(55, 45),
+      // The origin for this image is 0,0.
+      origin: new google.maps.Point(0,0),
+      // The anchor for this image is the point at 23, 44.
+      anchor: new google.maps.Point(23, 44)
+    };
+    var curShape = {
+        coord: [1, 1, 1, 44, 54, 44, 54, 1],
+        type: 'poly'
+    };
+    var curLatLng = new google.maps.LatLng({{ this_truck.latitude|safe }},
+                                           {{ this_truck.longitude|safe }});
+    var curMarker = new google.maps.Marker({
+        position: curLatLng,
+        map: map,
+        icon: curImage,
+        shape: curShape,
+        title: "{{ this_truck.name|safe }}", 
+        zIndex: 1000000
+    });
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+{% endblock %}

@@ -6,8 +6,18 @@
 
 {% block content %}
 <div class="container">
+  <h2>Food Trucks</h2>
   <p class="lead">
-    Trucks go here!
+    <ul>
+      {% for truck_item in trucks_list %}
+      <li>
+	<a href="/trucks/{{ truck_item.name }}/">
+	  {{ truck_item.name|safe }}
+	</a>
+      </li>
+      {% endfor %}
+    </ul>
   </p>
+  
 </div> <!-- container -->
 {% endblock %}
