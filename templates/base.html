@@ -10,10 +10,17 @@
     <meta name="author" content="">
 
     {% load staticfiles %}
-    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" 
+    <link href="{% static "bootstrap/css/bootstrap.css" %}" 
 	  rel="stylesheet" media="screen">
     <link href="{% static "bootstrap/css/bootstrap-responsive.css" %}" 
 	  rel="stylesheet">
+
+
+    <link href="http://fonts.googleapis.com/css?family=Raleway" 
+    rel="stylesheet" mtype="text/css">
+
+    <link href="{% static "bootstrap/css/custom.css" %}" 
+    rel="stylesheet">
 
     {% block head_scripts %}
     {% endblock %}
@@ -32,15 +39,26 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+<<<<<<< HEAD
+            <a class="brand" href="/"><img src="/static/images/logotranslong.png" width="150" height="40">
+              <!-- TruckHunt -->
+            </a>
+            <div class="nav-collapse collapse">
+              <h4>
+=======
             <a class="brand" href="/">TheTruckHunt</a>
             <div class="nav-collapse collapse">
 
+>>>>>>> 9171a0c34d999be52eb11033e22ee1af10763a8a
              <ul class="nav">
                <li><a href="/trucks/">Trucks</a></li>
                <li><a href="/featured/">Featured</a></li>
                <li><a href="/about/">About</a></li>
                <li><a href="/map_test/">Map Test</a></li>
              </ul>
+<<<<<<< HEAD
+           </h4>
+=======
 
              {% if request.user.is_authenticated %}
              <ul class="nav pull-right">
@@ -74,6 +92,7 @@
              </form>
              {% endif %}
 
+>>>>>>> 9171a0c34d999be52eb11033e22ee1af10763a8a
             </div><!--/.nav-collapse -->
           </div><!-- /.navbar-inner -->
         </div><!-- /.navbar -->
