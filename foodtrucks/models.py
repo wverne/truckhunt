@@ -17,6 +17,8 @@ class FoodTruck(models.Model):
     latitude       = models.FloatField(null=True)
     longitude      = models.FloatField(null=True)
 
+    owner          = models.ForeignKey('User')
+
     def __unicode__(self):
         return self.name
 
