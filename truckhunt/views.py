@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response, redirect
 from django.template.loader import get_template
 from django.template import Context
 from django.http import *
+from django.core.exceptions import PermissionDenied
 from django.contrib.auth import authenticate, login, logout
 
 from gmapi import maps
@@ -68,6 +69,7 @@ def user_page(request, inusername):
     user_object = User.objects.filter(username=inusername)
     if not user_object:
         raise Http404
-
+    if request.user != user_object[0]:
+        raise PermissionDenied
     return render(request, 'user_page.html',
                   {'this_user':  user_object[0]})
