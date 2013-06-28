@@ -34,10 +34,6 @@ def featured_page(request):
 def about_page(request):
     return render(request, 'about.html', {})
 
-def map_test_page(request):
-    return render(request, 'map_test.html',
-                  {'trucks_list': FoodTruck.objects.all()})
-
 def login_view(request):
     if not 'username' in request.POST:
         return redirect('/invalid_login/')

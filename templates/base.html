@@ -39,45 +39,38 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-<<<<<<< HEAD
             <a class="brand" href="/"><img src="/static/images/logotranslong.png" width="150" height="40">
               <!-- TruckHunt -->
             </a>
             <div class="nav-collapse collapse">
               <h4>
-=======
-            <a class="brand" href="/">TheTruckHunt</a>
-            <div class="nav-collapse collapse">
+		<ul class="nav">
+		  <li><a href="/trucks/">Trucks</a></li>
+		  <li><a href="/featured/">Featured</a></li>
+		  <li><a href="/about/">About</a></li>
+		</ul>
+              </h4>
 
->>>>>>> 9171a0c34d999be52eb11033e22ee1af10763a8a
-             <ul class="nav">
-               <li><a href="/trucks/">Trucks</a></li>
-               <li><a href="/featured/">Featured</a></li>
-               <li><a href="/about/">About</a></li>
-               <li><a href="/map_test/">Map Test</a></li>
-             </ul>
-<<<<<<< HEAD
-           </h4>
-=======
-
-             {% if request.user.is_authenticated %}
-             <ul class="nav pull-right">
-               <li class="navbar-text">
-		 Signed in as {{ request.user.username }}
-               </li>
-               <li>
-		 <a href="/user/{{ request.user.username }}/">
-		   My Trucks
-		 </a>
-	       </li>
-               <li class="divider-vertical"></li>
-               <li>
-		 <form id="signout" class="navbar-form"
-                       method="post" action="/logout/"> {% csrf_token %}
-		   <button type="submit" class="btn">Logout</button>
-		 </form>
-               </li>
-             </ul>
+              {% if request.user.is_authenticated %}
+	      <h4>
+		<ul class="nav pull-right">
+		  <li class="navbar-text">
+		    Signed in as {{ request.user.username }}
+		  </li>
+		  <li>
+		    <a href="/user/{{ request.user.username }}/">
+		      My Trucks
+		    </a>
+		  </li>
+		  <li class="divider-vertical"></li>
+		  <li>
+		    <form id="signout" class="navbar-form"
+			  method="post" action="/logout/"> {% csrf_token %}
+		      <button type="submit" class="btn">Logout</button>
+		    </form>
+		  </li>
+		</ul>
+	      </h4>
 
              {% else %}
              <form id="signin" class="navbar-form pull-right"
@@ -92,7 +85,6 @@
              </form>
              {% endif %}
 
->>>>>>> 9171a0c34d999be52eb11033e22ee1af10763a8a
             </div><!--/.nav-collapse -->
           </div><!-- /.navbar-inner -->
         </div><!-- /.navbar -->
