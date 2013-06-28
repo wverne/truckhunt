@@ -87,6 +87,8 @@
    */
   var foodtrucks = [
     {% for truck_item in trucks_list %}
+    {% if truck_item.latitude %}
+    {% if truck_item.longitude %}
     [
      "{{ truck_item.name|safe }}", 
      {{ truck_item.latitude }}, 
@@ -94,6 +96,8 @@
      {{ forloop.counter }},
      "/trucks/{{ truck_item.name|escapejs }}/"
     ],
+    {% endif %}
+    {% endif %}
     {% endfor %}
   ];
 
