@@ -38,9 +38,23 @@ def map_test_page(request):
                   {'trucks_list': FoodTruck.objects.all()})
 
 def login_view(request):
-    return render(request, 'homepage.html', 
-                  {'trucks_list': FoodTruck.objects.all()})
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return redirect('/')
+        else:
+            return redirect('/disabled_account/')
+    return redirect('/invalid_login/')
 
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+def disabled_page(request):
+    return render(request, 'disabled_account.html', {})
+
+def invalid_login_page(request):
+    return render(request, 'invalid_login.html', {})

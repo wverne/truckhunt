@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+{{ block.super }} - {{ this_truck.name|safe }}
+{% endblock %}
+
 {% block content %}
 <div class="span3 visible-phone"> 
     <h2>
@@ -82,7 +86,7 @@
           url: '/static/images/truckhunt_label_small_you.png',
           size: new google.maps.Size(55, 45),
           origin: new google.maps.Point(0,0),
-          anchor: new google.maps.Point(21, 44)
+          anchor: new google.maps.Point(23, 44)
         };
         var youShape = {
           coord: [1, 1, 1, 44, 54, 44, 54, 1],
@@ -161,8 +165,8 @@
       size: new google.maps.Size(55, 45),
       // The origin for this image is 0,0.
       origin: new google.maps.Point(0,0),
-      // The anchor for this image is the point at 21, 44.
-      anchor: new google.maps.Point(21, 44)
+      // The anchor for this image is the point at 23, 44.
+      anchor: new google.maps.Point(23, 44)
     };
 
     // Shapes define the clickable region of the icon.
@@ -199,8 +203,8 @@
       size: new google.maps.Size(55, 45),
       // The origin for this image is 0,0.
       origin: new google.maps.Point(0,0),
-      // The anchor for this image is the point at 21, 44.
-      anchor: new google.maps.Point(21, 44)
+      // The anchor for this image is the point at 23, 44.
+      anchor: new google.maps.Point(23, 44)
     };
     var curShape = {
         coord: [1, 1, 1, 44, 54, 44, 54, 1],

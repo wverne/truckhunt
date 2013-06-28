@@ -14,6 +14,8 @@ urlpatterns = patterns('truckhunt.views',
                        (r'^map_test/$', 'map_test_page'),
                        (r'^login/$', 'login_view'),
                        (r'^logout/$', 'logout_view'),
+                       (r'^disabled_account/$', 'disabled_page'),
+                       (r'^invalid_login/$', 'invalid_login_page'),
                       )
 
 urlpatterns += patterns('',
