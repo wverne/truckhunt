@@ -1,8 +1,11 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.template.loader import get_template
 from django.template import Context
 from django.http import *
+from django.contrib.auth import authenticate, login, logout
+
 from gmapi import maps
+
 from truckhunt.forms import *
 from foodtrucks.models import *
 
@@ -39,5 +42,5 @@ def login_view(request):
                   {'trucks_list': FoodTruck.objects.all()})
 
 def logout_view(request):
-    return render(request, 'homepage.html', 
-                  {'trucks_list': FoodTruck.objects.all()})
+    logout(request)
+    return redirect('/')
