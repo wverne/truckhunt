@@ -29,6 +29,9 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false">
 </script>
 <script>
+
+  var map;
+  
   function initialize() {
     var mapOptions = {
       zoom: 15,
@@ -36,9 +39,44 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
   
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
+    map = new google.maps.Map(document.getElementById('map-canvas'),
                                   mapOptions);
   
+
+    // Try HTML5 geolocation
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = new google.maps.LatLng(position.coords.latitude,
+                                         position.coords.longitude);
+
+        var youImage = {
+          url: '/static/images/truckhunt_label_small_you.png',
+          size: new google.maps.Size(55, 45),
+          origin: new google.maps.Point(0,0),
+          anchor: new google.maps.Point(23, 44)
+        };
+        var youShape = {
+          coord: [1, 1, 1, 44, 54, 44, 54, 1],
+          type: 'poly'
+        };
+        var youMarker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          icon: youImage,
+          shape: youShape,
+          title: "You are here",
+          zIndex: -1
+        });
+        
+        map.setCenter(pos);
+
+      }, function() {
+      });
+    } else {
+      // Browser doesn't support Geolocation
+    }
+
+
     setMarkers(map, foodtrucks);
   }
 
@@ -47,7 +85,25 @@
    * the order in which these markers should display on top of each
    * other.
    */
+<<<<<<< HEAD
 
+=======
+  var foodtrucks = [
+    {% for truck_item in trucks_list %}
+    {% if truck_item.latitude %}
+    {% if truck_item.longitude %}
+    [
+     "{{ truck_item.name|safe }}", 
+     {{ truck_item.latitude }}, 
+     {{ truck_item.longitude }},
+     {{ forloop.counter }},
+     "/trucks/{{ truck_item.name|escapejs }}/"
+    ],
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+  ];
+>>>>>>> 9171a0c34d999be52eb11033e22ee1af10763a8a
 
   function setMarkers(map, locations) {
     // Add markers to the map
@@ -66,8 +122,8 @@
       size: new google.maps.Size(55, 45),
       // The origin for this image is 0,0.
       origin: new google.maps.Point(0,0),
-      // The anchor for this image is the point at 22, 44.
-      anchor: new google.maps.Point(22, 44)
+      // The anchor for this image is the point at 23, 44.
+      anchor: new google.maps.Point(23, 44)
     };
 
     // Shapes define the clickable region of the icon.
@@ -88,7 +144,12 @@
           icon: image,
           shape: shape,
           title: foodtruck[0],
-          zIndex: foodtruck[3]
+          zIndex: foodtruck[3],
+          url: foodtruck[4]
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        window.location.href = this.url
       });
     }
   }
