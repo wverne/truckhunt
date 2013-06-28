@@ -24,11 +24,11 @@ def trucks_page(request, truckname=""):
                   {'trucks_list': FoodTruck.objects.all(),
                    'this_truck':  truck_object[0]})
 
-def types_page(request):
-    return render(request, 'types.html', {})
-
 def featured_page(request):
     return render(request, 'featured.html', {})
+
+def about_page(request):
+    return render(request, 'about.html', {})
 
 def map_test_page(request):
     return render(request, 'map_test.html',

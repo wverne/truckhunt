@@ -9,8 +9,8 @@ urlpatterns = patterns('truckhunt.views',
                        (r'^$',       'homepage'),
                        (r'^trucks/$', 'trucks_page'),
                        (r'^trucks/(.+)/$', 'trucks_page'),
-                       (r'^types/$', 'types_page'),
                        (r'^featured/$', 'featured_page'),
+                       (r'^about/$', 'about_page'),
                        (r'^map_test/$', 'map_test_page'),
                       )
 
