@@ -72,4 +72,5 @@ def user_page(request, inusername):
     if request.user != user_object[0]:
         raise PermissionDenied
     return render(request, 'user_page.html',
-                  {'this_user':  user_object[0]})
+                  {'this_user': user_object[0],
+                   'user_trucks': FoodTruck.objects.filter(owner=request.user)})

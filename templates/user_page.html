@@ -6,8 +6,19 @@
 
 {% block content %}
 <div class="container">
+  {% if user_trucks %}
   <p class="lead">
-    {{ user.username }}
+    {{ user.username }}'s Trucks
   </p>
+  <ul>
+    {% for truck_item in user_trucks %}
+    <li>
+      <a href="/trucks/{{ truck_item.name }}">{{ truck_item.name|safe }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+
+  {% endif %}
 </div> <!-- container -->
 {% endblock %}
