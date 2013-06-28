@@ -47,17 +47,7 @@
    * the order in which these markers should display on top of each
    * other.
    */
-  var foodtrucks = [
-    ['Hardcoded truck', 41.825, -71.415, 6],
-    {% for truck_item in trucks_list %}
-    [
-     '{{ truck_item.name|safe }}', 
-     {{ truck_item.latitude }}, 
-     {{ truck_item.longitude }},
-     {{ forloop.counter }}
-    ],
-    {% endfor %}
-  ];
+
 
   function setMarkers(map, locations) {
     // Add markers to the map
