@@ -33,3 +33,11 @@ def about_page(request):
 def map_test_page(request):
     return render(request, 'map_test.html',
                   {'trucks_list': FoodTruck.objects.all()})
+
+def login_view(request):
+    return render(request, 'homepage.html', 
+                  {'trucks_list': FoodTruck.objects.all()})
+
+def logout_view(request):
+    return render(request, 'homepage.html', 
+                  {'trucks_list': FoodTruck.objects.all()})

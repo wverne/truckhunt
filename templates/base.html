@@ -33,12 +33,42 @@
             </button>
             <a class="brand" href="/">TruckHunt</a>
             <div class="nav-collapse collapse">
+
              <ul class="nav">
                <li><a href="/trucks/">Trucks</a></li>
                <li><a href="/featured/">Featured</a></li>
                <li><a href="/about/">About</a></li>
                <li><a href="/map_test/">Map Test</a></li>
              </ul>
+
+             {% if request.user.is_authenticated %}
+             <ul class="nav pull-right">
+               <li class="navbar-text">
+		 Signed in as {{ request.user.first_name }}
+		 {{ request.user.last_name}}
+               </li>
+               <li class="divider-vertical"></li>
+               <li>
+		 <form id="signout" class="navbar-form"
+                       method="post" action="/logout/"> {% csrf_token %}
+		   <button type="submit" class="btn">Logout</button>
+		 </form>
+               </li>
+             </ul>
+
+             {% else %}
+             <form id="signin" class="navbar-form pull-right"
+                   method="post" action="/login/"> {% csrf_token %}
+               <input type="text" class="span2" placeholder="Email"
+                      name="identification" id="id_identification">
+               <input type="password" class="span2" placeholder="Password"
+                      name="password" id="id_password">
+               <button type="submit" name="logingin" class="btn">
+		 Login
+	       </button>
+             </form>
+             {% endif %}
+
             </div><!--/.nav-collapse -->
           </div><!-- /.navbar-inner -->
         </div><!-- /.navbar -->
