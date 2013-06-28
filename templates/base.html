@@ -47,6 +47,11 @@
                <li class="navbar-text">
 		 Signed in as {{ request.user.username }}
                </li>
+               <li>
+		 <a href="/user/{{ request.user.username }}/">
+		   My Trucks
+		 </a>
+	       </li>
                <li class="divider-vertical"></li>
                <li>
 		 <form id="signout" class="navbar-form"

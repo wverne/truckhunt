@@ -62,3 +62,12 @@ def disabled_page(request):
 
 def invalid_login_page(request):
     return render(request, 'invalid_login.html', {})
+
+def user_page(request, inusername):
+    # find appropriate user
+    user_object = User.objects.filter(username=inusername)
+    if not user_object:
+        raise Http404
+
+    return render(request, 'user_page.html',
+                  {'this_user':  user_object[0]})
