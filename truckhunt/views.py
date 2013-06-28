@@ -38,6 +38,10 @@ def map_test_page(request):
                   {'trucks_list': FoodTruck.objects.all()})
 
 def login_view(request):
+    if not 'username' in request.POST:
+        return redirect('/invalid_login/')
+    if not 'password' in request.POST:
+        return redirect('/invalid_login/')
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
